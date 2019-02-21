@@ -66,7 +66,7 @@ class WeixinController extends Controller
                 //写入数据库
                 $data = [
                     'openid'    => $openid,
-                    'add_time'  => time(date('Y-m-d H:i:s')),
+                    'add_time'  => time(),
                     'msg_type'  => 'image',
                     'media_id'  => $xml_str->MediaId,
                     'format'    => $xml_str->Format,
