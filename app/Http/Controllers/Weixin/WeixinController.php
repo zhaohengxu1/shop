@@ -63,10 +63,12 @@ class WeixinController extends Controller
                 </xml>';
                 echo $xmlStrResopnse;
 
+                $date=time();
+
                 //写入数据库
                 $data = [
                     'openid'    => $openid,
-                    'add_time'  => time(),
+                    'add_time'  => $date,
                     'msg_type'  => 'image',
                     'media_id'  => $xml_str->MediaId,
                     'format'    => $xml_str->Format,
