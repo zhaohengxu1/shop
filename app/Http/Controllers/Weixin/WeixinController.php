@@ -47,13 +47,14 @@ class WeixinController extends Controller
             //用户发送图片
             if($xml_str->MsgType=='image'){
                 $media_id=$xml_str->MediaId;
-                $file_name = $this->dlWxImg($xml_str->MediaId);
                 $res=$this->saveImage($media_id);
                 if($res){
                     $hint='我们已经收到你的图片啦！';   //hint  提示
                 }else{
                     $hint='很遗憾，您的图片我们没收到.....请稍后重试！';
                 }
+
+                $file_name = $this->dlWxImg($xml_str->MediaId);
                 $xmlStrResopnse='<xml>
                 <ToUserName><![CDATA['.$openid.']]></ToUserName>
                 <FromUserName><![CDATA['.$toUserName.']]></FromUserName>
@@ -76,6 +77,7 @@ class WeixinController extends Controller
 
                 $m_id = WeixinMedia::insertGetId($data);
                 var_dump($m_id);
+                
             }
         }
 
