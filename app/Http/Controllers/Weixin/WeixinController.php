@@ -6,7 +6,6 @@ use App\Model\WeixinUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use App\Model\WeixinMedia;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp;
@@ -48,6 +47,7 @@ class WeixinController extends Controller
             //用户发送图片
             if($xml_str->MsgType=='image'){
                 $media_id=$xml_str->MediaId;
+                $file_name = $this->dlWxImg($xml_str->MediaId);
                 $res=$this->saveImage($media_id);
                 if($res){
                     $hint='我们已经收到你的图片啦！';   //hint  提示
@@ -63,17 +63,15 @@ class WeixinController extends Controller
                 </xml>';
                 echo $xmlStrResopnse;
 
-                $date=time();
-
                 //写入数据库
                 $data = [
                     'openid'    => $openid,
-                    'add_time'  => $date,
+                    'add_time'  => time(),
                     'msg_type'  => 'image',
                     'media_id'  => $xml_str->MediaId,
                     'format'    => $xml_str->Format,
                     'msg_id'    => $xml_str->MsgId,
-                    'file_name'   => $media_id
+                    'file_name'   => $file_name
                 ];
 
                 $m_id = WeixinMedia::insertGetId($data);
@@ -134,8 +132,7 @@ class WeixinController extends Controller
         }
 
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
-
-        file_put_contents('logs/wx_event.log',$log_str);
+        file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
     }
 
     /**
