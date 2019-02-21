@@ -98,12 +98,12 @@ Route::post('/pdfadd','Upload\UploadController@pdfadd');
 
 
 //刷新token
-Route::get('/wechat/refresh_token','Wexin\WexinController@refreshToken');     //刷新token
+Route::get('/wechat/refresh_token','Weixin\WeixinController@refreshToken');     //刷新token
 
-Route::get('/wechat/valid','Wexin\WexinController@validToken');
-Route::get('/wechat/valid1','Wexin\WexinController@validToken1');
-Route::get('/wechat/valid1','Wexin\WexinController@validToken1');
+Route::get('/wechat/valid','Weixin\WeixinController@validToken');
+Route::get('/wechat/valid1','Weixin\WeixinController@validToken1');
+Route::get('/wechat/valid1','Weixin\WeixinController@validToken1');
 
-Route::post('/wechat/valid1','Wexin\WexinController@wxEvent');        //接收微信服务器事件推送
-Route::post('/wechat/valid','Wexin\WexinController@validToken');
-Route::get('/wechat/create_menu','Wexin\WexinController@createMenu');      //自定义菜单创建
+Route::post('/wechat/valid1','Weixin\WeixinController@wxEvent');        //接收微信服务器事件推送
+Route::post('/wechat/valid','Weixin\WeixinController@validToken');
+Route::get('/wechat/create_menu','Weixin\WeixinController@createMenu');      //自定义菜单创建
