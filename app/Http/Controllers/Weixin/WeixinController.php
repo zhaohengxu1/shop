@@ -6,6 +6,7 @@ use App\Model\WeixinUser;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
+use App\Model\WeixinMedia;
 use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp;
@@ -61,6 +62,20 @@ class WeixinController extends Controller
                 <Content><![CDATA['.$hint.']]></Content>
                 </xml>';
                 echo $xmlStrResopnse;
+
+                //写入数据库
+                $data = [
+                    'openid'    => $openid,
+                    'add_time'  => time(),
+                    'msg_type'  => 'image',
+                    'media_id'  => $xml_str->MediaId,
+                    'format'    => $xml_str->Format,
+                    'msg_id'    => $xml_str->MsgId,
+                    'local_file_name'   => $media_id
+                ];
+
+                $m_id = WeixinMedia::insertGetId($data);
+                var_dump($m_id);
             }
         }
 
@@ -323,5 +338,9 @@ class WeixinController extends Controller
             </xml>';
         echo $xmlStrResopnse;
     }
+
+
+
+
 
 }
