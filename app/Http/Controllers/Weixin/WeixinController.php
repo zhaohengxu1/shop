@@ -71,7 +71,7 @@ class WeixinController extends Controller
                     'media_id'  => $xml_str->MediaId,
                     'format'    => $xml_str->Format,
                     'msg_id'    => $xml_str->MsgId,
-                    'local_file_name'   => $media_id
+                    'file_name'   => $media_id
                 ];
 
                 $m_id = WeixinMedia::insertGetId($data);
