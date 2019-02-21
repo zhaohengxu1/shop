@@ -12,5 +12,7 @@ Route::group([
 
     $router->get('/', 'HomeController@index');
     $router->resource('/goods',GoodsController::class);
+    $router->resource('/material',MediaController::class);
+
 
 });

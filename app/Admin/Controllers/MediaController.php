@@ -10,7 +10,7 @@ use Encore\Admin\Grid;
 use Encore\Admin\Layout\Content;
 use Encore\Admin\Show;
 
-class WeixinController extends Controller
+class MediaController extends Controller
 {
     use HasResourceActions;
 
@@ -81,7 +81,15 @@ class WeixinController extends Controller
     {
         $grid = new Grid(new WeixinMedia);
 
-
+        $grid->id('Id');
+        $grid->openid('Openid');
+        $grid->add_time('Add time');
+        $grid->msg_type('Msg type');
+        $grid->media_id('Media id');
+        $grid->format('Format');
+        $grid->msg_id('Msg id');
+        $grid->file_name('File name');
+        $grid->file_path('File path');
 
         return $grid;
     }
@@ -96,7 +104,15 @@ class WeixinController extends Controller
     {
         $show = new Show(WeixinMedia::findOrFail($id));
 
-
+        $show->id('Id');
+        $show->openid('Openid');
+        $show->add_time('Add time');
+        $show->msg_type('Msg type');
+        $show->media_id('Media id');
+        $show->format('Format');
+        $show->msg_id('Msg id');
+        $show->file_name('File name');
+        $show->file_path('File path');
 
         return $show;
     }
@@ -110,7 +126,14 @@ class WeixinController extends Controller
     {
         $form = new Form(new WeixinMedia);
 
-
+        $form->text('openid', 'Openid');
+        $form->text('add_time', 'Add time');
+        $form->text('msg_type', 'Msg type');
+        $form->text('media_id', 'Media id');
+        $form->text('format', 'Format')->default('1');
+        $form->text('msg_id', 'Msg id');
+        $form->text('file_name', 'File name');
+        $form->textarea('file_path', 'File path');
 
         return $form;
     }
