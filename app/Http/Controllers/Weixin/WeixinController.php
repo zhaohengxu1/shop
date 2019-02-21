@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp;
 
-//use App\Model\WeixinMedia;
+use App\Model\WeixinMedia;
 
 class WeixinController extends Controller
 {
@@ -66,7 +66,7 @@ class WeixinController extends Controller
                 echo $xmlStrResopnse;
 
                 //写入数据库
-                $data = [
+                $img_data = [
                     'openid'    => $openid,
                     'add_time'  => time(),
                     'msg_type'  => 'image',
@@ -76,7 +76,7 @@ class WeixinController extends Controller
                     'file_name'   => $file_name
                 ];
 
-                $m_id = WeixinMedia::insertGetId($data);
+                $m_id = WeixinMedia::insertGetId($img_data);
                 var_dump($m_id);
 
             }
