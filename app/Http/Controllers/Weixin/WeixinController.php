@@ -135,8 +135,7 @@ class WeixinController extends Controller
 
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
 
-        print_r($log_str);die;
-        file_put_contents('logs/wx_event.log',$log_str,FILE_APPEND);
+        file_put_contents('logs/wx_event.log',$log_str);
     }
 
     /**
