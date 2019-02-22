@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Storage;
 use GuzzleHttp;
 
 use App\Model\MaterialModel;
-
 use App\Model\WeixinMedia;
 
 class WeixinController extends Controller
