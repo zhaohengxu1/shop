@@ -107,3 +107,6 @@ Route::get('/wechat/valid1','Weixin\WeixinController@validToken1');
 Route::post('/wechat/valid1','Weixin\WeixinController@wxEvent');        //接收微信服务器事件推送
 Route::post('/wechat/valid','Weixin\WeixinController@validToken');
 Route::get('/wechat/create_menu','Weixin\WeixinController@createMenu');      //自定义菜单创建
+
+Route::get('/wechat/form','Weixin\WeixinController@form');
+Route::post('/wechat/form','Weixin\WeixinController@material');
