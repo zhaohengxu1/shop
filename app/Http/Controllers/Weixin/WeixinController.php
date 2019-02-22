@@ -388,13 +388,13 @@ class WeixinController extends Controller
         echo $body;echo '<hr>';
         $d = json_decode($body,true);
         print_r($d);echo '<hr>';
-//        $data=[
-//            'media'=>$d['media_id'],
-//            'media_url'=>$d['url'],
-//            'add_time'=>time()
-//        ];
-//        $m_id = WeixinMaterial::insertGetId($data);
-//        echo $m_id;
+        $data=[
+            'media'=>$d['media_id'],
+            'media_url'=>$d['url'],
+            'add_time'=>time()
+        ];
+        $m_id = WeixinMaterial::insertGetId($data);
+        echo $m_id;
 
     }
 
