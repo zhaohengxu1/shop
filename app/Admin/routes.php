@@ -13,6 +13,9 @@ Route::group([
     $router->get('/', 'HomeController@index');
     $router->resource('/goods',GoodsController::class);
     $router->resource('/material',MediaController::class);
+    $router->resource('/form',MaterialController::class);
+
+    $router->post('/form','MaterialController@material');
 
 
 });
