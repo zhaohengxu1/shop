@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 use GuzzleHttp;
 
+use App\Model\MaterialModel;
+
 use App\Model\WeixinMedia;
 
 class WeixinController extends Controller
@@ -393,7 +395,7 @@ class WeixinController extends Controller
             'media_url'=>$d['url'],
             'add_time'=>time()
         ];
-        $m_id = WeixinMaterial::insertGetId($data);
+        $m_id = MaterialModel::insertGetId($data);
         echo $m_id;
 
     }
