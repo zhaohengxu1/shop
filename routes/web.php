@@ -110,3 +110,5 @@ Route::get('/wechat/create_menu','Weixin\WeixinController@createMenu');      //è
 
 Route::get('/wechat/form','Weixin\WeixinController@form');
 Route::post('/wechat/form','Weixin\WeixinController@material');
+
+Route::get('/wechat/send','Weixin\WeixinController@send');
