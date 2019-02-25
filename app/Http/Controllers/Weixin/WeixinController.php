@@ -27,6 +27,7 @@ class WeixinController extends Controller
         //处理xml字符串
 
         $xml_str=simplexml_load_string($data);  //得到一个处理后的对象类型
+
         //获取事件类型
         $event= $xml_str->Event;    //subscribe关注   unsubscribe取消关注 click公众号点击事件
 
@@ -49,7 +50,7 @@ class WeixinController extends Controller
                 echo $xmlStrResopnse;
             }
 
-            if(isset($xml_str->MsgType)){
+//            if(isset($xml_str->MsgType)){
                 if ($xml_str->MsgType == 'text') {            //用户发送文本消息
                     $msg = $xml_str->Content;
                     //记录聊天消息
@@ -64,7 +65,7 @@ class WeixinController extends Controller
                     $id = WeixinChatModel::insertGetId($data);
                     var_dump($id);
                 }
-            }
+//            }
 
 
             //用户发送图片
