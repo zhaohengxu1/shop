@@ -48,14 +48,8 @@ class WeixinController extends Controller
                 <Content><![CDATA[' . $msg . ']]></Content>
                 </xml>';
                 echo $xmlStrResopnse;
-            }
 
-//            if(isset($xml_str->MsgType)){
-                if ($xml_str->MsgType == 'text') {            //用户发送文本消息
-                    $msg = $xml_str->Content;
-                    //记录聊天消息
-
-                    $data = [
+                $data = [
                         'msg' => $msg,
                         'msgid' => $xml_str->MsgId,
                         'openid' => $openid,
@@ -64,7 +58,24 @@ class WeixinController extends Controller
 
                     $id = WeixinChatModel::insertGetId($data);
                     var_dump($id);
-                }
+
+            }
+
+//            if(isset($xml_str->MsgType)){
+//                if ($xml_str->MsgType == 'text') {            //用户发送文本消息
+//                    $msg = $xml_str->Content;
+//                    //记录聊天消息
+//
+//                    $data = [
+//                        'msg' => $msg,
+//                        'msgid' => $xml_str->MsgId,
+//                        'openid' => $openid,
+//                        'msg_type' => 1        // 1用户发送消息 2客服发送消息
+//                    ];
+//
+//                    $id = WeixinChatModel::insertGetId($data);
+//                    var_dump($id);
+//                }
 //            }
 
 
