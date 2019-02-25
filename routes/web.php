@@ -111,4 +111,12 @@ Route::get('/wechat/create_menu','Weixin\WeixinController@createMenu');      //�
 Route::get('/wechat/form','Weixin\WeixinController@form');
 Route::post('/wechat/form','Weixin\WeixinController@material');
 
+/** 聊天测试 */
 Route::get('/wechat/send','Weixin\WeixinController@send');
+
+/** 客服聊天 */
+Route::get('/wechat/reply','Weixin\WeixinController@reply');
+
+//获取用户聊天信息
+Route::get('/wechat/chat','Weixin\WeixinController@chat');
+

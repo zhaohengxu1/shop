@@ -12,6 +12,7 @@ use GuzzleHttp;
 
 use App\Model\MaterialModel;
 use App\Model\WeixinMedia;
+use App\Model\WeixinChatModel;
 
 class WeixinController extends Controller
 {
@@ -30,23 +31,42 @@ class WeixinController extends Controller
         $event= $xml_str->Event;    //subscribe关注   unsubscribe取消关注 click公众号点击事件
 
         //处理微信接受用户消息，自动回复
-        if(isset($xml_str->MsgType)){
+        if(isset($xml_str->MsgType)) {
             //获取openid
-            $openid=$xml_str->FromUserName;
+            $openid = $xml_str->FromUserName;
             //获取用户微信信息
-            $toUserName=$xml_str->ToUserName;
-            //用户发送文字
-            if($xml_str->MsgType=='text'){
-                $msg=$xml_str->Content;
-                $xmlStrResopnse='<xml>
-                <ToUserName><![CDATA['.$openid.']]></ToUserName>
-                <FromUserName><![CDATA['.$toUserName.']]></FromUserName>
-                <CreateTime>'.time().'</CreateTime>
-                <MsgType><![CDATA[text]]></MsgType>
-                <Content><![CDATA['.$msg.']]></Content>
-                </xml>';
-                echo $xmlStrResopnse;
+            $toUserName = $xml_str->ToUserName;
+//            //用户发送文字
+//            if ($xml_str->MsgType == 'text') {
+//                $msg = $xml_str->Content;
+//                $xmlStrResopnse = '<xml>
+//                <ToUserName><![CDATA[' . $openid . ']]></ToUserName>
+//                <FromUserName><![CDATA[' . $toUserName . ']]></FromUserName>
+//                <CreateTime>' . time() . '</CreateTime>
+//                <MsgType><![CDATA[text]]></MsgType>
+//                <Content><![CDATA[' . $msg . ']]></Content>
+//                </xml>';
+//                echo $xmlStrResopnse;
+//            }
+
+            if(isset($xml_str->MsgType)){
+                if ($xml_str->MsgType == 'text') {            //用户发送文本消息
+                    $msg = $xml_str->Content;
+                    //记录聊天消息
+
+                    $data = [
+                        'msg' => $msg,
+                        'msgid' => $xml_str->MsgId,
+                        'openid' => $openid,
+                        'msg_type' => 1        // 1用户发送消息 2客服发送消息
+                    ];
+
+                    $id = WeixinChatModel::insertGetId($data);
+                    var_dump($id);
+                }
             }
+
+
             //用户发送图片
             if($xml_str->MsgType=='image'){
                 $file_name=$xml_str->MediaId;
@@ -408,7 +428,7 @@ class WeixinController extends Controller
             "msgtype"=>"text",
             "text"=>
                 [
-                    "content"=>"Hello World"
+                    "content"=>"您好，我是狸狸狸客服！"
                 ]
         ];
         $r=$client->request('post',$url,['body'=>json_encode($data,JSON_UNESCAPED_UNICODE)]);
@@ -424,6 +444,38 @@ class WeixinController extends Controller
 
 
     }
+
+    public function reply(){
+        $data = [
+            'openid'    => 'olCGo1Iuq5eNf3oKma49iWteA9Ik'
+        ];
+        return view('form.reply',$data);
+    }
+
+    public function chat()
+    {
+        $openid = $_GET['openid'];  //用户openid
+        $pos = $_GET['pos'];        //上次聊天位置
+        $msg = WeixinChatModel::where(['openid'=>$openid])->where('id','>',$pos)->first();
+        //$msg = WeixinChatModel::where(['openid'=>$openid])->where('id','>',$pos)->get();
+        if($msg){
+            $response = [
+                'errno' => 0,
+                'data'  => $msg->toArray()
+            ];
+
+        }else{
+            $response = [
+                'errno' => 50001,
+                'msg'   => '服务器异常，请联系管理员'
+            ];
+        }
+
+        die( json_encode($response));
+
+    }
+
+
 
 
 
