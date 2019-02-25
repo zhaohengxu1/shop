@@ -37,32 +37,20 @@ class WeixinController extends Controller
             $openid = $xml_str->FromUserName;
             //获取用户微信信息
             $toUserName = $xml_str->ToUserName;
-            //用户发送文字
-//            if ($xml_str->MsgType == 'text') {
-//                $msg = $xml_str->Content;
-//                $xmlStrResopnse = '<xml>
-//                <ToUserName><![CDATA[' . $openid . ']]></ToUserName>
-//                <FromUserName><![CDATA[' . $toUserName . ']]></FromUserName>
-//                <CreateTime>' . time() . '</CreateTime>
-//                <MsgType><![CDATA[text]]></MsgType>
-//                <Content><![CDATA[' . $msg . ']]></Content>
-//                </xml>';
-//                echo $xmlStrResopnse;
-//            }
 
             if(isset($xml_str->MsgType)){
                 if ($xml_str->MsgType == 'text') {            //用户发送文本消息
                     $msg = $xml_str->Content;
 
                     //记录聊天消息
-//                    $xmlStrResopnse = '<xml>
-//                    <ToUserName><![CDATA[' . $openid . ']]></ToUserName>
-//                    <FromUserName><![CDATA[' . $toUserName . ']]></FromUserName>
-//                    <CreateTime>' . time() . '</CreateTime>
-//                    <MsgType><![CDATA[text]]></MsgType>
-//                    <Content><![CDATA[' . $msg . ']]></Content>
-//                    </xml>';
-//                    echo $xmlStrResopnse;
+                    $xmlStrResopnse = '<xml>
+                    <ToUserName><![CDATA[' . $openid . ']]></ToUserName>
+                    <FromUserName><![CDATA[' . $toUserName . ']]></FromUserName>
+                    <CreateTime>' . time() . '</CreateTime>
+                    <MsgType><![CDATA[text]]></MsgType>
+                    <Content><![CDATA[' . $msg . ']]></Content>
+                    </xml>';
+                    echo $xmlStrResopnse;
 
                     $msg_data = [
                         'msg' => $msg,
