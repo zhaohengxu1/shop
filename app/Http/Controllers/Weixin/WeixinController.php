@@ -50,7 +50,7 @@ class WeixinController extends Controller
 //                echo $xmlStrResopnse;
 //            }
 
-//            if(isset($xml_str->MsgType)){
+            if(isset($xml_str->MsgType)){
                 if ($xml_str->MsgType == 'text') {            //用户发送文本消息
                     $msg = $xml_str->Content;
 
@@ -74,7 +74,7 @@ class WeixinController extends Controller
                     $id = WeixinChatModel::insertGetId($msg_data);
                     var_dump($id);
                 }
-//            }
+            }
 
 
             //用户发送图片
