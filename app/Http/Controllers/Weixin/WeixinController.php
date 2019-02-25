@@ -50,19 +50,19 @@ class WeixinController extends Controller
 //                echo $xmlStrResopnse;
 //            }
 
-            if(isset($xml_str->MsgType)){
+//            if(isset($xml_str->MsgType)){
                 if ($xml_str->MsgType == 'text') {            //用户发送文本消息
                     $msg = $xml_str->Content;
 
                     //记录聊天消息
-                    $xmlStrResopnse = '<xml>
-                    <ToUserName><![CDATA[' . $openid . ']]></ToUserName>
-                    <FromUserName><![CDATA[' . $toUserName . ']]></FromUserName>
-                    <CreateTime>' . time() . '</CreateTime>
-                    <MsgType><![CDATA[text]]></MsgType>
-                    <Content><![CDATA[' . $msg . ']]></Content>
-                    </xml>';
-                    echo $xmlStrResopnse;
+//                    $xmlStrResopnse = '<xml>
+//                    <ToUserName><![CDATA[' . $openid . ']]></ToUserName>
+//                    <FromUserName><![CDATA[' . $toUserName . ']]></FromUserName>
+//                    <CreateTime>' . time() . '</CreateTime>
+//                    <MsgType><![CDATA[text]]></MsgType>
+//                    <Content><![CDATA[' . $msg . ']]></Content>
+//                    </xml>';
+//                    echo $xmlStrResopnse;
 
                     $msg_data = [
                         'msg' => $msg,
@@ -74,7 +74,7 @@ class WeixinController extends Controller
                     $id = WeixinChatModel::insertGetId($msg_data);
                     var_dump($id);
                 }
-            }
+//            }
 
 
             //用户发送图片
@@ -431,14 +431,18 @@ class WeixinController extends Controller
 
     public function send()
     {
+
+        $text=$_GET['send_msg'];
+        $openid=$_GET['openid'];
+
         $url = 'https://api.weixin.qq.com/cgi-bin/message/custom/send?access_token='.$this->getWXAccessToken();
         $client=new GuzzleHttp\Client(['base_uri' => $url]);
         $data=[
-            "touser"=>"olCGo1Iuq5eNf3oKma49iWteA9Ik",
+            "touser"=>$openid,
             "msgtype"=>"text",
             "text"=>
                 [
-                    "content"=>"您好，我是狸狸狸客服！"
+                    "content"=>$text
                 ]
         ];
         $r=$client->request('post',$url,['body'=>json_encode($data,JSON_UNESCAPED_UNICODE)]);

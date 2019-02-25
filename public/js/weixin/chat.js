@@ -31,5 +31,18 @@ $("#send_msg_btn").click(function(e){
     var msg_str = '<p style="color: mediumorchid"> >>>>> '+send_msg+'</p>';
     $("#chat_div").append(msg_str);
     $("#send_msg").val("");
+
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url     :   '/wechat/send',
+        type    :   'get',
+        data: {send_msg:send_msg,openid:openid},
+        success :   function(d){
+           console.log(d);
+        }
+    });
+
 });
 // 客服发送消息 end
