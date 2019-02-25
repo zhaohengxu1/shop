@@ -42,16 +42,6 @@ class WeixinController extends Controller
                 if ($xml_str->MsgType == 'text') {            //用户发送文本消息
                     $msg = $xml_str->Content;
 
-                    //记录聊天消息
-                    $xmlStrResopnse = '<xml>
-                    <ToUserName><![CDATA[' . $openid . ']]></ToUserName>
-                    <FromUserName><![CDATA[' . $toUserName . ']]></FromUserName>
-                    <CreateTime>' . time() . '</CreateTime>
-                    <MsgType><![CDATA[text]]></MsgType>
-                    <Content><![CDATA[' . $msg . ']]></Content>
-                    </xml>';
-                    echo $xmlStrResopnse;
-
                     $msg_data = [
                         'msg' => $msg,
                         'msgid' => $xml_str->MsgId,
