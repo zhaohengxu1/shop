@@ -50,7 +50,7 @@ class WeixinController extends Controller
                     ];
 
                     $id = WeixinChatModel::insertGetId($msg_data);
-                    var_dump($id);
+                    //var_dump($id);
                 }
             }
 
