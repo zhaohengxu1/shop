@@ -120,3 +120,6 @@ Route::get('/wechat/reply','Weixin\WeixinController@reply');
 //获取用户聊天信息
 Route::get('/wechat/chat','Weixin\WeixinController@chat');
 
+//微信支付
+Route::get('/wechat/wxpay','Weixin\PayController@test');
+Route::post('/wechat/pay/notice','Weixin\PayController@notice');     //微信支付通知回调
