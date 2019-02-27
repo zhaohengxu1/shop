@@ -174,7 +174,6 @@ class PayController extends Controller
         file_put_contents('logs/wx_pay_notice.log',$log_str,FILE_APPEND);
 
         $xml = (array)simplexml_load_string($data,'SimpleXMLElement',LIBXML_NOCDATA);
-//        print_r($xml);die;
 
         if($xml['result_code'] == 'SUCCESS' && $xml['return_code'] == 'SUCCESS'){      //微信支付成功回调
             //验证签名
@@ -221,8 +220,8 @@ class PayController extends Controller
 
     /** 延签 */
     public function check_sign($xml){
-        $this -> value = [];
-        $this -> value = $xml;
+        $this -> values = [];
+        $this -> values = $xml;
         $sign = $this -> SetSign();
         if($sign!==$xml['sign']){
             return false;
