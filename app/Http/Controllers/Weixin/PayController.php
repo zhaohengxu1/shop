@@ -248,10 +248,10 @@ class PayController extends Controller
         $where=[
             'order_num'=>$order_num
         ];
-        $data=[
+        $order_data=[
             'order_status'=>2
         ];
-        $res=OrderModel::where($where)->update($data);
+        $res=OrderModel::where($where)->update($order_data);
         if($res){
             return true;
         }
@@ -268,6 +268,8 @@ class PayController extends Controller
 //        var_dump($data);die;
         if($data['order_status']==2){
             echo 1;
+        }else{
+            echo false;
         }
     }
 
