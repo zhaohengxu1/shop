@@ -188,7 +188,7 @@ class PayController extends Controller
                     file_put_contents('logs/wx_pay.log',$log_str,FILE_APPEND);
                 }else{
                     $log_str .= "Sign OK!<<<< \n\n";
-                    file_put_contents('log/wx_pay.log',$log_str,FILE_APPEND);
+                    file_put_contents('logs/wx_pay.log',$log_str,FILE_APPEND);
                 }
                 //逻辑处理
                 $res=$this->dealOrder($xml);
