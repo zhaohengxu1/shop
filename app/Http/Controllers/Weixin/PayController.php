@@ -269,7 +269,7 @@ class PayController extends Controller
         if($data['order_status']==2){
             echo 1;
         }else{
-            echo false;
+            echo 2;
         }
     }
 
