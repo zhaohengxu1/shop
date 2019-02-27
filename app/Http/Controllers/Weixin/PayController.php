@@ -36,7 +36,6 @@ class PayController extends Controller
 
         $this->values = [];
         $this->values = $order_info;
-        print_r($order_info);die;
         $this->SetSign();
 
         $xml = $this->ToXml();      //将数组转换为XML
@@ -180,7 +179,6 @@ class PayController extends Controller
         if($xml['result_code'] == 'SUCCESS' && $xml['return_code'] == 'SUCCESS'){      //微信支付成功回调
             //验证签名
             $sign = $this->check_sign($xml);
-            var_dump($sign);die;
 
             if($sign){       //签名验证成功
                 //记录日志
@@ -226,7 +224,6 @@ class PayController extends Controller
         $this -> value = [];
         $this -> value = $xml;
         $sign = $this -> SetSign();
-        print_r($sign);die;
         if($sign!==$xml['sign']){
             return false;
         }else{
