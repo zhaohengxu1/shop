@@ -28,7 +28,8 @@
     </form>
     @if ($order_status == 1)
         <button class="btn btn-danger"><a href="/goodslist" style="text-decoration: none; color: #ffffff;">继续购买</a></button>
-        <button class="btn btn-danger"><a href="/alipay/{{$order_num}}" style="text-decoration: none; color: #ffffff;">去付款</a></button>
+        {{--<button class="btn btn-danger"><a href="/alipay/{{$order_num}}" style="text-decoration: none; color: #ffffff;">去付款</a></button>--}}
+        <button class="btn btn-danger"><a href="/wechat/wxpay/{{$order_num}}" style="text-decoration: none; color: #ffffff;">去付款</a></button>
         <button class="btn btn-danger"><a href="/orderdel/{{$order_num}}/{{$order_status}}" style="text-decoration: none; color: #ffffff;">取消订单   </a></button>
         <button class="btn btn-danger"><a href="/allorders" style="text-decoration: none; color: #ffffff;">我的全部订单</a></button>
     @elseif ($order_status == 2)

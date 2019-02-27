@@ -121,5 +121,10 @@ Route::get('/wechat/reply','Weixin\WeixinController@reply');
 Route::get('/wechat/chat','Weixin\WeixinController@chat');
 
 //微信支付
-Route::get('/wechat/wxpay','Weixin\PayController@test');
+Route::get('/wechat/wxpay/{order_num}','Weixin\PayController@test');
 Route::post('/wechat/pay/notice','Weixin\PayController@notice');     //微信支付通知回调
+
+//二维码
+Route::get('/wechat/code','Weixin\PayController@code');
+//检测是否支付成功
+Route::post('/wechat/pay/find','Weixin\PayController@find');
