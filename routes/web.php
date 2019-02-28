@@ -128,3 +128,7 @@ Route::post('/wechat/pay/notice','Weixin\PayController@notice');     //微信支
 Route::get('/wechat/code','Weixin\PayController@code');
 //检测是否支付成功
 Route::post('/wechat/pay/find','Weixin\PayController@find');
+
+/** 微信登录 */
+Route::get('/wechatLogin/','Weixin\WeixinController@wechatLogin');
+Route::get('/wechat/sns','Weixin\WeixinController@sns')
