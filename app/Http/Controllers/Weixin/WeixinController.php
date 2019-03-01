@@ -511,23 +511,24 @@ class WeixinController extends Controller
         //计算签名
 
         $jsconfig = [
-            'appid' => env('WEIXIN_APPID_01'),        //APPID
+            'appid' => env('WEIXIN_APPID_0'),        //APPID
             'timestamp' => time(),
             'noncestr'    => str_random(10),
+            //'sign'      => $this->wxJsConfigSign()
         ];
 
         $sign = $this->wxJsConfigSign($jsconfig);
         $jsconfig['sign'] = $sign;
-        $data=[
-            'jsconfig'=>$jsconfig
+        $data = [
+            'jsconfig'  => $jsconfig
         ];
-
-        return view('wechat.jssdk',$data);
-
-
+        return view('weixin.jssdk',$data);
     }
 
-    //计算JSSDK sign
+
+    /**
+     * 计算JSSDK sign
+     */
     public function wxJsConfigSign($param)
     {
         $current_url = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];     //当前调用 jsapi的 url
@@ -537,13 +538,20 @@ class WeixinController extends Controller
         return $signature;
     }
 
-    //获取jsapi_ticket
-    public function getJsapiTicket(){
+
+    /**
+     * 获取jsapi_ticket
+     * @return mixed
+     */
+    public function getJsapiTicket()
+    {
+
         //是否有缓存
         $ticket = Redis::get($this->redis_weixin_jsapi_ticket);
-//        var_dump($ticket);die;
         if(!$ticket){           // 无缓存 请求接口
             $access_token = $this->getWXAccessToken();
+            //$access_token = '19_l1VWmofWKeoXasSTo7l225TnrfjGcXNC9Tt1gOgP669fc3KWq7Yy2y4gxE7QNWcDOA7sfwdy3Krbx1BSI5BAul5FhB-L35mD36ZFH1mqXdsP_I9DwU2eIFaNpv0PEJdABAHWB';
+
             $ticket_url = 'https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token='.$access_token.'&type=jsapi';
             $ticket_info = file_get_contents($ticket_url);
             $ticket_arr = json_decode($ticket_info,true);
@@ -556,10 +564,7 @@ class WeixinController extends Controller
         }
         return $ticket;
 
-
     }
-
-
 
 
 
