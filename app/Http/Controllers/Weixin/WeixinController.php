@@ -522,7 +522,7 @@ class WeixinController extends Controller
         $data = [
             'jsconfig'  => $jsconfig
         ];
-        return view('weixin.jssdk',$data);
+        return view('wechat.jssdk',$data);
     }
 
 
