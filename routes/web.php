@@ -132,3 +132,6 @@ Route::post('/wechat/pay/find','Weixin\PayController@find');
 /** 微信登录 */
 Route::get('/wechatLogin','Weixin\WeixinController@wechatLogin');
 Route::get('/wechat/sns','Weixin\WeixinController@sns');
+
+//微信 JSSDK
+Route::get('/wechat/jssdk/test','Weixin\WeixinController@jssdkTest');       // 测试
