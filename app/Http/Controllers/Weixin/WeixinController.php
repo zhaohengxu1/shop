@@ -556,7 +556,7 @@ class WeixinController extends Controller
             if(isset($ticket_arr['ticket'])){
                 $ticket = $ticket_arr['ticket'];
                 Redis::set($this->redis_weixin_jsapi_ticket,$ticket);
-                Redis::setTimeout($this->redis_weixin_jsapi_ticket,3600);       //设置过期时间 3600s
+                Redis::setTimeout($this->redis_weixin_jsapi_ticket,7200);       //设置过期时间 3600s
             }
         }
         return $ticket;
